@@ -13,6 +13,34 @@
   font-weight: 400;
 }
 
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: white;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  z-index: 1000;
+}
+
+.suggestions li {
+  padding: 8px 12px;
+}
+
+.suggestions li a {
+  color: #333;
+  text-decoration: none;
+  display: block;
+}
+
+.suggestions li:hover {
+  background: #f0f0f0;
+}
+
 .title {
   font-size: 42px;
   margin-bottom: 30px;
@@ -23,6 +51,7 @@
   display: flex;
   justify-content: center;
   margin-bottom: 40px;
+  position: relative;
 }
 
 .search-input {

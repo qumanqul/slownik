@@ -1,12 +1,11 @@
-import './App.css';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Navbar.jsx';
-import Main from './pages/Main.jsx';
-import Writers from './pages/Writers.jsx';
-
+import "./App.css";
+import { Routes, Route } from "react-router-dom";
+import Navbar from "./components/Navbar.jsx";
+import Main from "./pages/Main.jsx";
+import Writers from "./pages/Writers.jsx";
+import WriterDetail from "./pages/WriterDetail.jsx";
 
 function App() {
-  
   return (
     <>
       <Navbar />
@@ -14,9 +13,10 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/writers" element={<Writers />} />
         <Route path="*" element={<h2>404 — Nie znaleziono strony</h2>} />
+        <Route path="/writers/:id" element={<WriterDetail />} />
       </Routes>
     </>
-  )
+  );
 }
 
 export default App;

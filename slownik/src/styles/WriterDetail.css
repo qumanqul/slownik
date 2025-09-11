@@ -1,0 +1,46 @@
+.writer-detail {
+  display: flex;
+  gap: 2rem;
+  padding: 1rem;
+  scroll-behavior: smooth; 
+}
+
+h1 {
+  padding: 0;
+}
+
+.sidebar {
+  min-width: 250px;
+  border-right: 1px solid #ddd;
+  position: sticky;
+  top: 1rem;
+  height: max-content;
+}
+
+.sidebar ul {
+  list-style: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 0.5rem 0;
+}
+
+.sidebar a {
+  color: #1a5dab;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.sidebar a:hover {
+  text-decoration: underline;
+}
+
+.sidebar a.active {
+  font-weight: bold;
+  color: #d62828;
+}
+
+.content {
+  flex: 1;
+}

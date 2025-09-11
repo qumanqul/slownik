@@ -1,54 +1,40 @@
+import { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 import "../styles/Writers.css";
 
-const writers = [
-  "Abramowicz Mieczysław",
-  "Adamkowicz Adam",
-  "Afanasjew Alina",
-  "Afanasjew Jerzy",
-  "Baran Wojciech",
-  "Bednarek Anna",
-  "Bielski Krzysztof",
-  "Błaszczyk Natalia",
-  "Borowski Damian",
-  "Chmielewski Zofia",
-  "Cieślak Michał",
-  "Czajkowski Patrycja",
-  "Cybulski Jan",
-  "Dąbrowski Kamil",
-  "Domański Julia",
-  "Drzewiecki Piotr",
-  "Dudziak Monika",
-  "Edwardowski Katarzyna",
-  "Eugeniusz Rafał",
-  "Ewicz Alicja",
-  "Ertman Szymon",
-  "Fabiański Oskar",
-  "Fedorowicz Barbara",
-  "Filipek Łukasz",
-  "Frączek Weronika",
-  "Gajewski Dominik",
-  "Głowacki Agnieszka",
-  "Górski Adrian",
-  "Hajduk Ewelina",
-  "Haller Mateusz",
-  "Hołowacz Sebastian",
-  "Ilnicki Kinga",
-  "Iwaszkiewicz Bartosz",
-  "Izdebski Marek"
-];
-
-// Группировка по первой букве
-const groupByLetter = (names) => {
-  const sorted = [...names].sort((a, b) => a.localeCompare(b, "pl"));
-  return sorted.reduce((acc, name) => {
-    const letter = name[0].toUpperCase();
+const groupByLetter = (writers) => {
+  const sorted = [...writers].sort((a, b) =>
+    a.name.localeCompare(b.name, "pl")
+  );
+  return sorted.reduce((acc, writer) => {
+    const letter = writer.name[0].toUpperCase();
     if (!acc[letter]) acc[letter] = [];
-    acc[letter].push(name);
+    acc[letter].push(writer);
     return acc;
   }, {});
 };
 
 export default function Writers() {
+  const [writers, setWriters] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    fetch("/pisarze_full.json")
+      .then((res) => res.json())
+      .then((data) => {
+        setWriters(data);
+        setLoading(false);
+      })
+      .catch((err) => {
+        console.error("Ошибка загрузки JSON:", err);
+        setLoading(false);
+      });
+  }, []);
+
+  if (loading) {
+    return <main className="writers">Ładowanie...</main>;
+  }
+
   const grouped = groupByLetter(writers);
 
   return (
@@ -58,7 +44,9 @@ export default function Writers() {
           <h2 className="letter">{letter}</h2>
           <ul>
             {grouped[letter].map((writer) => (
-              <li key={writer}>- {writer}</li>
+              <li key={writer.id}>
+                <Link to={`/writers/${writer.id}`}>- {writer.name}</Link>
+              </li>
             ))}
           </ul>
         </div>
