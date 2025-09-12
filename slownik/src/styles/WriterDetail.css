@@ -1,17 +1,25 @@
 .writer-detail {
   display: flex;
   gap: 2rem;
-  padding: 1rem;
-  scroll-behavior: smooth; 
+  padding: 2rem;
+  font-family: "afacad";
+  color: #222;
 }
 
-h1 {
-  padding: 0;
+.name {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.name .dates {
+  font-weight: normal;
+  font-size: 1rem;
+  color: #555;
+  margin-left: 0.5rem;
 }
 
 .sidebar {
-  min-width: 250px;
-  border-right: 1px solid #ddd;
+  min-width: 350px;
   position: sticky;
   top: 1rem;
   height: max-content;
@@ -43,4 +51,37 @@ h1 {
 
 .content {
   flex: 1;
+}
+
+.content h1 {
+  font-size: 1.8rem;
+  margin-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+.content > p {
+  font-style: italic;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+  color: #444;
+}
+
+.content h2 {
+  font-size: 1.3rem;
+  margin-top: 2rem;
+  margin-bottom: 0.6rem;
+  border-bottom: 1px solid #ddd;
+  padding-bottom: 0.2rem;
+  font-weight: 600;
+}
+
+.content ul {
+  list-style: disc;
+  padding: 0;
+  margin: 0;
+}
+
+.content li {
+  margin: 0.3rem 0;
+  font-size: 0.95rem;
 }

@@ -18,7 +18,7 @@ export default function WriterDetail() {
         setLoading(false);
       })
       .catch((err) => {
-        console.error("Ошибка загрузки JSON:", err);
+        console.error("Error to open JSON:", err);
         setLoading(false);
       });
   }, [id]);
@@ -78,7 +78,6 @@ export default function WriterDetail() {
       writer.works["Opracowania poszczególnych utworów"],
     "Utwory poświęcone pisarzowi": writer["Utwory poświęcone pisarzowi"],
     "Informacje inne": writer["Informacje inne"],
-    Linki: writer.related_links,
   };
 
   return (
@@ -103,11 +102,15 @@ export default function WriterDetail() {
       </aside>
 
       <section className="content">
-        <h1 className="name">{writer.name}</h1>
-        <p>
-          {writer.birth_date ? `(ur. ${writer.birth_date})` : ""}{" "}
-          {writer.death_date ? `(zm. ${writer.death_date})` : ""}
-        </p>
+        <h1 className="name">
+          {writer.name}{" "}
+          {(writer.birth_date || writer.death_date) && (
+            <span className="dates">
+              ( {writer.birth_date ? `ur. ${writer.birth_date}` : ""}{" "}
+              {writer.death_date ? `– zm. ${writer.death_date}` : ""} )
+            </span>
+          )}
+        </h1>
 
         {writer.biography && <p>{writer.biography}</p>}
 
@@ -128,21 +131,6 @@ export default function WriterDetail() {
               </ul>
             </div>
           ) : null
-        )}
-
-        {writer.related_links && writer.related_links.length > 0 && (
-          <div id="Linki" ref={(el) => (sectionRefs.current["Linki"] = el)}>
-            <h2>Linki</h2>
-            <ul>
-              {writer.related_links.map((link, idx) => (
-                <li key={idx}>
-                  <a href={link} target="_blank" rel="noreferrer">
-                    {link}
-                  </a>
-                </li>
-              ))}
-            </ul>
-          </div>
         )}
       </section>
     </main>
