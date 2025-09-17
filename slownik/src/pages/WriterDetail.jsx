@@ -2,6 +2,7 @@ import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import "../styles/WriterDetail.css";
 import full_json from "../data/wbpg_fixed.json"
+import renderWork from "../components/renderWork.js";
 
 const sortByYear = (works) => {
     if(works&&works.length&&works[0].rok)
@@ -148,34 +149,8 @@ export default function WriterDetail() {
                                 .sort((a, b) =>
                                     (a.tytul).localeCompare(b.tytul, "pl"))
                                 .sort((a, b) => a.rok - b.rok)
-                                .map((work, idx) => {
-                                    // build a single HTML string
-                                    let html = `<strong>${work.tytul || ""}</strong>`;
-                                    if (work.podtytul) html += ` : ${work.podtytul}`;
-                                    if (work.gatunek) html += ` [${work.gatunek}]`;
-                                    if (work.strefa_odpow) html += ` / ${work.strefa_odpow}`;
-                                    html += `.`;
-                                    if (work.mwydania) html += ` - ${work.mwydania}`;
-                                    if (work.wydawnictwo) html += `  : ${work.wydawnictwo}`;
-                                    if (work.mwydania2) html += ` ;; ${work.mwydania2}`;
-                                    if (work.wydawnictwo2) html += `  : ${work.wydawnictwo2}`;
-                                    if (work.rok) html += `, ${work.rok}`;
-                                    if (work.strony) html += `. - ${work.strony}`;
-                                    if (work.dodatki) html += ` : ${work.dodatki}`;
-                                    if (work.format) html += ` ;; ${work.format}`;
-                                    if (work.seria) html += `. - (${work.seria})`;
+                                .map((work, idx) => <li dangerouslySetInnerHTML={{__html:renderWork(work)}} key={idx}/>)}
 
-                                    if (work.isbn) html += `<br/>ISBN ${work.isbn}`;
-                                    if (work.dedykacja) html += `<br/><span style="padding-left:2em;">\tDedykacja: ${work.dedykacja}</span>`;
-                                    if (work.zawartosc) html += `<br/><span style="padding-left:2em;">\tZawartość: ${work.zawartosc}</span>`;
-                                    if (work.uwagi) html += `<br/>${work.uwagi}`;
-                                    if (work.hasla) html += `<br/>${work.hasla}`;
-
-                                    return (
-                                        <li key={idx} dangerouslySetInnerHTML={{__html: html}}>
-                                        </li>
-                                    );
-                                })}
 
                         </ul>
                     </div>
@@ -190,3 +165,35 @@ export default function WriterDetail() {
     </main>
   );
 }
+
+
+// build a single HTML string
+//     let html = `<strong>${work.tytul || ""}</strong>`;
+//     if (work.podtytul) html += ` : ${work.podtytul}`;
+//     if (work.gatunek) html += ` [${work.gatunek}]`;
+//     if (work.tytul_antologii) html += ` // W: ${work.tytul_antologii}`;
+//     if (work.podtytul_antologii) html += ` : ${work.podtytul_antologii}`;
+//     if (work.opr) html += ` / ${work.opr}`;
+//     if (work.strefa_odpow) html += ` / ${work.strefa_odpow}`;
+//     html += `.`;
+//     if (work.mwydania) html += ` - ${work.mwydania}`;
+//     if (work.wydawnictwo) html += `  : ${work.wydawnictwo}`;
+//     if (work.mwydania2) html += ` ;; ${work.mwydania2}`;
+//     if (work.wydawnictwo2) html += `  : ${work.wydawnictwo2}`;
+//     if (work.rok) html += `, ${work.rok}`;
+//     if (work.strony) html += `. - ${work.strony}`;
+//     if (work.dodatki) html += ` : ${work.dodatki}`;
+//     if (work.format) html += ` ;; ${work.format}`;
+//     if (work.seria) html += `. - (${work.seria})`;
+//
+//     if (work.isbn) html += `<br/>ISBN ${work.isbn}`;
+//     if (work.dedykacja) html += `<br/><span style="padding-left:2em;">\tDedykacja: ${work.dedykacja}</span>`;
+//     if (work.zawartosc) html += `<br/><span style="padding-left:2em;">\tZawartość: ${work.zawartosc}</span>`;
+//     if (work.uwagi) html += `<br/>${work.uwagi}`;
+//     if (work.hasla) html += `<br/>${work.hasla}`;
+//
+//     return (
+//         <li key={idx} dangerouslySetInnerHTML={{__html: html}}>
+//         </li>
+//     );
+// })}
