@@ -1,27 +1,36 @@
 import { useParams, Link } from "react-router-dom";
 import { useEffect, useState, useRef } from "react";
 import "../styles/WriterDetail.css";
+import full_json from "../data/wbpg_fixed.json"
 
+const sortByYear = (works) => {
+    if(works&&works.length&&works[0].rok)
+        return works.sort((a, b) =>
+            a.rok<b.rok
+        );
+}
 export default function WriterDetail() {
   const { id } = useParams();
-  const [writer, setWriter] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [writer, setWriter] = useState(full_json[8].data.find(a=>a.id===id));
+
+  console.log(writer)
+  // const [loading, setLoading] = useState(true);
   const [activeSection, setActiveSection] = useState(null);
   const sectionRefs = useRef({});
 
-  useEffect(() => {
-    fetch("/pisarze_full.json")
-      .then((res) => res.json())
-      .then((data) => {
-        const found = data.find((w) => w.id === parseInt(id));
-        setWriter(found || null);
-        setLoading(false);
-      })
-      .catch((err) => {
-        console.error("Error to open JSON:", err);
-        setLoading(false);
-      });
-  }, [id]);
+  // useEffect(() => {
+  //   fetch("/pisarze_full.json")
+  //     .then((res) => res.json())
+  //     .then((data) => {
+  //       const found = data.find((w) => w.id === parseInt(id));
+  //       setWriter(found || null);
+  //       setLoading(false);
+  //     })
+  //     .catch((err) => {
+  //       console.error("Error to open JSON:", err);
+  //       setLoading(false);
+  //     });
+  // }, [id]);
 
   useEffect(() => {
     if (!writer) return;
@@ -45,9 +54,7 @@ export default function WriterDetail() {
     return () => observer.disconnect();
   }, [writer]);
 
-  if (loading) {
-    return <main className="writer-detail">Ładowanie...</main>;
-  }
+
 
   if (!writer) {
     return (
@@ -59,27 +66,30 @@ export default function WriterDetail() {
   }
 
   const sidebarSections = {
-    "Wydawnictwa zwarte": writer.works["Wydawnictwa zwarte"],
+    "Wydawnictwa zwarte": full_json[19].data.filter(a=>a.id_pisarza==id),
     "Scenariusze, utwory sceniczne, słuchowiska":
-      writer.works["Scenariusze, utwory sceniczne, słuchowiska"],
+        full_json[15].data.filter(a=>a.id_pisarza==id),
     "Publikacje w antologiach i pracach zbiorowych":
-      writer.works["Publikacje w antologiach i pracach zbiorowych"],
-    "Publikacje w czasopismach": writer.works["Publikacje w czasopismach"],
-    Przekłady: writer.works["Przekłady"],
-    Adaptacje: writer.works["Adaptacje"],
-    "Wstępy, prace redakcyjne": writer.works["Wstępy, prace redakcyjne"],
-    "Wywiady i wypowiedzi": writer.works["Wywiady i wypowiedzi"],
+        full_json[12].data.filter(a=>a.id_pisarza==id),
+    "Publikacje w czasopismach": full_json[11].data.filter(a=>a.id_pisarza==id),
+    Przekłady: full_json[10].data.filter(a=>a.id_pisarza==id),
+    Adaptacje: full_json[2].data.filter(a=>a.id_pisarza==id),
+    "Wstępy, prace redakcyjne": full_json[18].data.filter(a=>a.id_pisarza==id),
+    "Wywiady i wypowiedzi": full_json[20].data.filter(a=>a.id_pisarza==id),
     "Bibliografie, słowniki, historie literatury":
-      writer.works["Bibliografie, słowniki, historie literatury"],
-    "Opracowania ogólne": writer.works["Opracowania ogólne"],
+        full_json[5].data.filter(a=>a.id_pisarza==id),
+    "Opracowania ogólne": full_json[6].data.filter(a=>a.id_pisarza==id),
     "Pomniejsze materiały biograficzne":
-      writer.works["Pomniejsze materiały biograficzne"],
+        full_json[5].data.filter(a=>a.id_pisarza==id),
     "Opracowania poszczególnych utworów":
-      writer.works["Opracowania poszczególnych utworów"],
-    "Utwory poświęcone pisarzowi": writer["Utwory poświęcone pisarzowi"],
-    "Informacje inne": writer["Informacje inne"],
+        full_json[7].data.filter(a=>a.id_pisarza==id),
+    "Utwory poświęcone pisarzowi": full_json[16].data.filter(a=>a.id_pisarza==id),
+    "Informacje inne": full_json[4].data.filter(a=>a.id_pisarza==id),
   };
-
+  console.log(sidebarSections);
+    Object.entries(sidebarSections).map(([category,items]) => {
+       console.log(items);
+    })
   return (
     <main className="writer-detail">
       <aside className="sidebar">
@@ -101,38 +111,82 @@ export default function WriterDetail() {
         </ul>
       </aside>
 
-      <section className="content">
-        <h1 className="name">
-          {writer.name}{" "}
-          {(writer.birth_date || writer.death_date) && (
-            <span className="dates">
+        <section className="content">
+            <h1 className="name">
+                {writer.imie + " " + writer.nazwisko + " "}
+                {(writer.birth_date || writer.death_date) && (
+                    <span className="dates">
               ( {writer.birth_date ? `ur. ${writer.birth_date}` : ""}{" "}
-              {writer.death_date ? `– zm. ${writer.death_date}` : ""} )
+                        {writer.death_date ? `– zm. ${writer.death_date}` : ""} )
             </span>
-          )}
-        </h1>
+                )}
+            </h1>
 
-        {writer.biography && <p>{writer.biography}</p>}
+            {full_json[3].data.find(a => a.id_pisarza == id) &&
+                <p style={{}}
+                   dangerouslySetInnerHTML={{__html: full_json[3].data.find(a => a.id_pisarza == id).tekst}}></p>
+            }
+            <h1>Indeks Tytułów</h1>
+            <br/>
+            <br/>
+            <h1>TWÓRCZOŚĆ</h1>
+            <br/>
 
-        {Object.entries(writer.works).map(([category, items]) =>
-          items.length > 0 ? (
-            <div
-              key={category}
-              id={category.replace(/\s+/g, "-")}
-              ref={(el) =>
-                (sectionRefs.current[category.replace(/\s+/g, "-")] = el)
-              }
-            >
-              <h2>{category}</h2>
-              <ul>
-                {items.map((work, idx) => (
-                  <li key={idx}>{work}</li>
-                ))}
-              </ul>
-            </div>
-          ) : null
-        )}
-      </section>
+            {Object.entries(sidebarSections).map(([category, items]) =>
+                items.length > 0 ? (
+                    <div
+                        key={category}
+                        id={category.replace(/\s+/g, "-")}
+                        ref={(el) =>
+                            (sectionRefs.current[category.replace(/\s+/g, "-")] = el)
+                        }
+                    >
+                        <h2>{category}</h2>
+                        <br/><br/>
+                        <ul>
+                            {items
+                                .sort((a, b) =>
+                                    (a.tytul).localeCompare(b.tytul, "pl"))
+                                .sort((a, b) => a.rok - b.rok)
+                                .map((work, idx) => {
+                                    // build a single HTML string
+                                    let html = `<strong>${work.tytul || ""}</strong>`;
+                                    if (work.podtytul) html += ` : ${work.podtytul}`;
+                                    if (work.gatunek) html += ` [${work.gatunek}]`;
+                                    if (work.strefa_odpow) html += ` / ${work.strefa_odpow}`;
+                                    html += `.`;
+                                    if (work.mwydania) html += ` - ${work.mwydania}`;
+                                    if (work.wydawnictwo) html += `  : ${work.wydawnictwo}`;
+                                    if (work.mwydania2) html += ` ;; ${work.mwydania2}`;
+                                    if (work.wydawnictwo2) html += `  : ${work.wydawnictwo2}`;
+                                    if (work.rok) html += `, ${work.rok}`;
+                                    if (work.strony) html += `. - ${work.strony}`;
+                                    if (work.dodatki) html += ` : ${work.dodatki}`;
+                                    if (work.format) html += ` ;; ${work.format}`;
+                                    if (work.seria) html += `. - (${work.seria})`;
+
+                                    if (work.isbn) html += `<br/>ISBN ${work.isbn}`;
+                                    if (work.dedykacja) html += `<br/><span style="padding-left:2em;">\tDedykacja: ${work.dedykacja}</span>`;
+                                    if (work.zawartosc) html += `<br/><span style="padding-left:2em;">\tZawartość: ${work.zawartosc}</span>`;
+                                    if (work.uwagi) html += `<br/>${work.uwagi}`;
+                                    if (work.hasla) html += `<br/>${work.hasla}`;
+
+                                    return (
+                                        <li key={idx} dangerouslySetInnerHTML={{__html: html}}>
+                                        </li>
+                                    );
+                                })}
+
+                        </ul>
+                    </div>
+                ) : null
+            )}
+            {/*{*/}
+            {/*    Object.entries(sidebarSections).map(([category,items]) => {*/}
+            {/*        (<p key={category}>{category}</p>)*/}
+            {/*    })*/}
+            {/*}*/}
+        </section>
     </main>
   );
 }
