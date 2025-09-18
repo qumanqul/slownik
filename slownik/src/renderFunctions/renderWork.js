@@ -10,7 +10,7 @@ function renderWork(work,category) {
     if(category==="Publikacje w antologiach i pracach zbiorowych")return renderAntologia(work)
     if(category==="Scenariusze, utwory sceniczne, słuchowiska")return renderScenariusze(work)
     if(category==="Przekłady")return renderPrzeklady(work)
-
+    if(category==="Informacje inne")return(work.tekst)
 
     return ""
 }
