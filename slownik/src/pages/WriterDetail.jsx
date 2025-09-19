@@ -72,11 +72,11 @@ export default function WriterDetail() {
       {nazwa:"Wstępy, prace redakcyjne",data: full_json[18].data.filter(a=>a.id_pisarza==id)},
       {nazwa:"Wywiady i wypowiedzi",data: full_json[20].data.filter(a=>a.id_pisarza==id)},
       {nazwa:"Bibliografie, słowniki, historie literatury",data:
-        full_json[5].data.filter(a=>a.id_pisarza==id)},
+        full_json[14].data.filter(a=>a.id_pisarza==id)},
       {nazwa:"Opracowania ogólne",data: full_json[6].data.filter(a=>a.id_pisarza==id)},
       {nazwa:"Pomniejsze materiały biograficzne",data:
-        full_json[5].data.filter(a=>a.id_pisarza==id)},
-    {nazwa:"Opracowania poszczególnych utworów",data:
+              full_json[5].data.filter(a=>a.id_pisarza==id)},
+      {nazwa:"Opracowania poszczególnych utworów",data:
             full_json[7].data.filter(a=>a.id_pisarza==id)},
     {nazwa:"Utwory poświęcone pisarzowi",data: full_json[16].data.filter(a=>a.id_pisarza==id)},
     {nazwa:"Informacje inne",data: full_json[4].data.filter(a=>a.id_pisarza==id)},
@@ -140,8 +140,10 @@ export default function WriterDetail() {
                         <ol>
                             {array.data
                                 .sort((a, b) =>
-                                    (a.tytul).localeCompare(b.tytul, "pl"))
+                                    (a.tytul||"").localeCompare(b.tytul||"", "pl"))
                                 .sort((a, b) => a.rok - b.rok)
+                                .sort((a, b) =>
+                                    (a.tytul_utworu||"").localeCompare(b.tytul_utworu||"", "pl"))
                                 .map((work, idx) => <li dangerouslySetInnerHTML={{__html:renderWork(work,array.nazwa)}} key={idx}/>)}
 
 

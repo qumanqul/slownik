@@ -1,4 +1,4 @@
-function renderCzasopisma(work) {
+function publikacjeWCzasopismach(work) {
     let html = `<strong>${work.tytul || ""}</strong>`;
 
     if (work.podtytul) html += `:  ${work.podtytul}`;
@@ -24,4 +24,4 @@ function renderCzasopisma(work) {
     return html
 }
 
-export default renderCzasopisma;
+export default publikacjeWCzasopismach;

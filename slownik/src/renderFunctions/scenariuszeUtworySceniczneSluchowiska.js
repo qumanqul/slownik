@@ -1,4 +1,4 @@
-function renderScenariusze(work) {
+function scenariuszeUtworySceniczneSluchowiska(work) {
     let html = `<strong>${work.tytul || ""}</strong>`;
 
     if (work.podtytul) html += ` : ${work.podtytul}`;
@@ -20,4 +20,4 @@ function renderScenariusze(work) {
     return html
 }
 
-export default renderScenariusze;
+export default scenariuszeUtworySceniczneSluchowiska;

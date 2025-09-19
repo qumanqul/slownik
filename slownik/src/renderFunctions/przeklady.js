@@ -1,4 +1,4 @@
-function renderPrzeklady(work) {
+function przeklady(work) {
     let html = `<strong>${work.autor || ""}</strong>`;
 
     if (work.tytul) html += `:  ${work.tytul}`;
@@ -27,4 +27,4 @@ function renderPrzeklady(work) {
     return html
 }
 
-export default renderPrzeklady;
+export default przeklady;
