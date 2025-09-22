@@ -106,7 +106,7 @@ export default function WriterDetail() {
 
         <section className="content">
             <h1 className="name">
-                {writer.imie + " " + writer.nazwisko + " "}
+                {(writer.imie + " " + writer.nazwisko + " ").replace("<br>","")}
                 {(writer.birth_date || writer.death_date) && (
                     <span className="dates">
               ( {writer.birth_date ? `ur. ${writer.birth_date}` : ""}{" "}
@@ -144,7 +144,7 @@ export default function WriterDetail() {
                                 .sort((a, b) => a.rok - b.rok)
                                 .sort((a, b) =>
                                     (a.tytul_utworu||"").localeCompare(b.tytul_utworu||"", "pl"))
-                                .map((work, idx) => <li dangerouslySetInnerHTML={{__html:renderWork(work,array.nazwa)}} key={idx}/>)}
+                                .map((work, idx) =><> <li dangerouslySetInnerHTML={{__html:renderWork(work,array.nazwa)}} key={idx}/><br/></>)}
 
 
                         </ol>

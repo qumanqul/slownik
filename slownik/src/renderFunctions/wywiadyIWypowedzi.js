@@ -16,7 +16,9 @@ function wywiadyIWypowedzi(work) {
     if (work.wydawnictwo) html += `  : ${work.wydawnictwo}`;
     if (work.mwydania2) html += ` ;; ${work.mwydania2}`;
     if (work.wydawnictwo2) html += `  : ${work.wydawnictwo2}`;
-    if (work.rok) html += ` - ${work.rok}`;
+    if (work.zeszyt_rocznik) html += ` - ${work.zeszyt_rocznik}`;
+    if (!work.zeszyt_rocznik&&work.rok) html += ` - ${work.rok}`;
+    if (work.zeszyt_rocznikx&&work.rok) html += ` (${work.rok})`;
     if (work.nr) html += `, ${work.nr}`;
     if (work.tytul_dodatku) html += `, dod. ${work.tytul_dodatku}`;
     if (work.nr_dodatku) html += `, ${work.nr_dodatku}`;

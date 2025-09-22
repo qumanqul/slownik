@@ -1,18 +1,22 @@
 function publikacjeWCzasopismach(work) {
-    let html = `<strong>${work.tytul || ""}</strong>`;
-
-    if (work.podtytul) html += `:  ${work.podtytul}`;
-    if (work.gatunek) html += `:  [${work.gatunek}]`;
-    if (work.odpowiedzialnosc) html += `/ ${work.odpowiedzialnosc}`;
+    let html = `<strong>${work.autor || work.tytul|| ""}</strong>`;
+    if (work.autor) html+=". ";
+    if (work.tytul&&work.autor) html += ` ${work.tytul}`;
+    
+    if (work.podtytul) html += ` :  ${work.podtytul}`;
+    if (work.gatunek) html += ` :  [${work.gatunek}]`;
+    if (work.odpowiedzialnosc) html += ` / ${work.odpowiedzialnosc}`;
+    if (work.rec_pracy) html += `. - Rec. pracy : ${work.rec_pracy}`;
     if (work.cykl) html += `. - ${work.cykl}`;
+    if (work.uwagi_drobne) html += `. - ${work.uwagi_drobne}`;
 
     if (work.tytul_czasopisma) html += ` // ${work.tytul_czasopisma}`;
     html += `.`;
-    if (work.tom_rocznik) html += `- ${work.tom_rocznik}`;
 
     if (work.wydawnictwo) html += `  : ${work.wydawnictwo}`;
-    if (work.uwagi_drobne) html += ` - ${work.uwagi_drobne}.`;
-    if (work.rok) html += ` - ${work.rok}`;
+    if (work.tom_rocznik) html += ` - ${work.tom_rocznik}`;
+    if (!work.tom_rocznik&&work.rok) html += ` - ${work.rok}`;
+    if (work.tom_rocznik&&work.rok) html += ` (${work.rok})`;
     if (work.numer) html += `, ${work.numer}`;
     if (work.tytul_dod_czasopisma) html += `, dod. ${work.tytul_dod_czasopisma}`;
     if (work.nr_dodatku) html += `, ${work.nr_dodatku}`;

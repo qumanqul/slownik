@@ -2,10 +2,10 @@
 function publikacjeWAntologiachIPracachZbiorowych(work) {
     let html = `<strong>${work.tytul || ""}</strong>`;
     if (work.gatunek) html += ` [${work.gatunek}]`;
-    if (work.tytul_antologii) html += ` // W: ${work.tytul_antologii}`;
     if (work.podtytul) html += ` : ${work.podtytul}`;
 
     if (work.oznaczenie_odpowiedzialnosci) html += ` / ${work.oznaczenie_odpowiedzialnosci}`;
+    if (work.tytul_antologii) html += ` // W: ${work.tytul_antologii}`;
 
     if (work.podtytul_antologii) html += ` : ${work.podtytul_antologii}`;
     if (work.opr) html += ` / ${work.opr}`;
