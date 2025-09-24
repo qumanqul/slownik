@@ -59,7 +59,12 @@ export default function WriterDetail() {
       </main>
     );
   }
-
+//1 i 2 nie potrzebne
+// (2,4,5,6,7,10,11,12,13,14,16,18,19,20) to tabele utworów
+// 3 to biogram na poczatku strony
+// 17 to wstep po biogramu
+// 8 to pisarz
+// 9(prace_redakcyjne) i 15(sluchowiska) i 21(zawartosc wydawnictwa)tabeli sa puste
   const sidebarSections = [
       {nazwa:"Wydawnictwa zwarte",data: full_json[19].data.filter(a=>a.id_pisarza==id)},
       {nazwa:"Scenariusze, utwory sceniczne, słuchowiska",data:
@@ -81,7 +86,6 @@ export default function WriterDetail() {
     {nazwa:"Utwory poświęcone pisarzowi",data: full_json[16].data.filter(a=>a.id_pisarza==id)},
     {nazwa:"Informacje inne",data: full_json[4].data.filter(a=>a.id_pisarza==id)},
   ];
-  console.log(sidebarSections);
 
   return (
     <main className="writer-detail">
@@ -106,18 +110,25 @@ export default function WriterDetail() {
 
         <section className="content">
             <h1 className="name">
-                {(writer.imie + " " + writer.nazwisko + " ").replace("<br>","")}
+                {(writer.imie + " " + writer.nazwisko + " ").replace("<br>", "")}
                 {(writer.birth_date || writer.death_date) && (
                     <span className="dates">
               ( {writer.birth_date ? `ur. ${writer.birth_date}` : ""}{" "}
                         {writer.death_date ? `– zm. ${writer.death_date}` : ""} )
+
             </span>
                 )}
             </h1>
 
             {full_json[3].data.find(a => a.id_pisarza == id) &&
+                // biogram
                 <p style={{}}
                    dangerouslySetInnerHTML={{__html: full_json[3].data.find(a => a.id_pisarza == id).tekst}}></p>
+            }
+            {full_json[17].data.find(a => a.id_pisarza == id) &&
+                // wstep
+                <p style={{}}
+                   dangerouslySetInnerHTML={{__html: full_json[17].data.find(a => a.id_pisarza == id).tekst}}></p>
             }
             <h1>Indeks Tytułów</h1>
             <br/>
@@ -140,11 +151,13 @@ export default function WriterDetail() {
                         <ol>
                             {array.data
                                 .sort((a, b) =>
-                                    (a.tytul||"").localeCompare(b.tytul||"", "pl"))
+                                    (a.tytul || "").localeCompare(b.tytul || "", "pl"))
                                 .sort((a, b) => a.rok - b.rok)
                                 .sort((a, b) =>
-                                    (a.tytul_utworu||"").localeCompare(b.tytul_utworu||"", "pl"))
-                                .map((work, idx) =><> <li dangerouslySetInnerHTML={{__html:renderWork(work,array.nazwa)}} key={idx}/><br/></>)}
+                                    (a.tytul_utworu || "").localeCompare(b.tytul_utworu || "", "pl"))
+                                .map((work, idx) => <>
+                                    <li dangerouslySetInnerHTML={{__html: renderWork(work, array.nazwa)}} key={idx}/>
+                                    <br/></>)}
 
 
                         </ol>
@@ -162,33 +175,3 @@ export default function WriterDetail() {
 }
 
 
-// build a single HTML string
-//     let html = `<strong>${work.tytul || ""}</strong>`;
-//     if (work.podtytul) html += ` : ${work.podtytul}`;
-//     if (work.gatunek) html += ` [${work.gatunek}]`;
-//     if (work.tytul_antologii) html += ` // W: ${work.tytul_antologii}`;
-//     if (work.podtytul_antologii) html += ` : ${work.podtytul_antologii}`;
-//     if (work.opr) html += ` / ${work.opr}`;
-//     if (work.strefa_odpow) html += ` / ${work.strefa_odpow}`;
-//     html += `.`;
-//     if (work.mwydania) html += ` - ${work.mwydania}`;
-//     if (work.wydawnictwo) html += `  : ${work.wydawnictwo}`;
-//     if (work.mwydania2) html += ` ;; ${work.mwydania2}`;
-//     if (work.wydawnictwo2) html += `  : ${work.wydawnictwo2}`;
-//     if (work.rok) html += `, ${work.rok}`;
-//     if (work.strony) html += `. - ${work.strony}`;
-//     if (work.dodatki) html += ` : ${work.dodatki}`;
-//     if (work.format) html += ` ;; ${work.format}`;
-//     if (work.seria) html += `. - (${work.seria})`;
-//
-//     if (work.isbn) html += `<br/>ISBN ${work.isbn}`;
-//     if (work.dedykacja) html += `<br/><span style="padding-left:2em;">\tDedykacja: ${work.dedykacja}</span>`;
-//     if (work.zawartosc) html += `<br/><span style="padding-left:2em;">\tZawartość: ${work.zawartosc}</span>`;
-//     if (work.uwagi) html += `<br/>${work.uwagi}`;
-//     if (work.hasla) html += `<br/>${work.hasla}`;
-//
-//     return (
-//         <li key={idx} dangerouslySetInnerHTML={{__html: html}}>
-//         </li>
-//     );
-// })}

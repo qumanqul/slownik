@@ -2,7 +2,7 @@ function publikacjeWCzasopismach(work) {
     let html = `<strong>${work.autor || work.tytul|| ""}</strong>`;
     if (work.autor) html+=". ";
     if (work.tytul&&work.autor) html += ` ${work.tytul}`;
-    
+
     if (work.podtytul) html += ` :  ${work.podtytul}`;
     if (work.gatunek) html += ` :  [${work.gatunek}]`;
     if (work.odpowiedzialnosc) html += ` / ${work.odpowiedzialnosc}`;
