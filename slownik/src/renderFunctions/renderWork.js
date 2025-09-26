@@ -14,7 +14,6 @@ import wstepyPraceRedakcyjne from "./wstepyPracyRedakcyjne.js";
 import pisarze from "./pisarze.js";
 
 function renderWork(work,category) {
-    console.log(category)
     if(category==="Wydawnictwa zwarte")return wydawnictwaZwarte(work)
     if(category==="Publikacje w czasopismach")return publikacjeWCzasopismach(work)
     if(category==="Publikacje w antologiach i pracach zbiorowych")return publikacjeWAntologiachIPracachZbiorowych(work)

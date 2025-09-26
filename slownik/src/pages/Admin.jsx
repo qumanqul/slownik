@@ -80,14 +80,12 @@ export default function Admin() {
             );
         case "add":
             return (
-                    <div style={{width:'10%'}}>
             <Form
                 action={action}
                 section={section}
                 setAction={setAction}
                 onSubmit={handleAdd}
             />
-                    </div>
             );
         default:
             return null;

@@ -9,7 +9,6 @@ export default function WriterDetail() {
   const [writer, setWriter] = useState(null);
   const [activeSection, setActiveSection] = useState(null);
   const sectionRefs = useRef({});
-    console.log(full_json)
   const normalizeId = (str) =>
     str
       .replace(/\s+/g, "-")

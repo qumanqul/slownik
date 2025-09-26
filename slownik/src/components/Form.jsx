@@ -38,8 +38,6 @@ export default function Form({
 
     const handleChange = (e, header) => {
         setFormData({ ...formData, [header]: e.target.value })
-        console.log(section);
-        console.log(formData);
         };
 
 
