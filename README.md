@@ -17,14 +17,12 @@ cd slownik
 2. **Install dependencies:**
 
 
-Copy code
 ````bash
 npm install
 ````
 3. **Start the development server (Vite dev server with hot reload):**
 
 
-Copy code
 ````bash
 npm run dev
 ````
