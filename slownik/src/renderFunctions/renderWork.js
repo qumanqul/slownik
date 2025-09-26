@@ -11,8 +11,10 @@ import pomniejszeMaterialyBiograficzne from "./pomniejszeMaterialyBiograficzne.j
 import opracowaniaPoszczegolnychUtworow from "./opracowaniaPoszczegolnychUtworow.js";
 import utworyPosweconePisazowi from "./utworyPosweconePisazowi.js";
 import wstepyPraceRedakcyjne from "./wstepyPracyRedakcyjne.js";
+import pisarze from "./pisarze.js";
 
 function renderWork(work,category) {
+    console.log(category)
     if(category==="Wydawnictwa zwarte")return wydawnictwaZwarte(work)
     if(category==="Publikacje w czasopismach")return publikacjeWCzasopismach(work)
     if(category==="Publikacje w antologiach i pracach zbiorowych")return publikacjeWAntologiachIPracachZbiorowych(work)
@@ -27,6 +29,9 @@ function renderWork(work,category) {
     if(category==="Opracowania poszczególnych utworów")return opracowaniaPoszczegolnychUtworow(work)
     if(category==="Utwory poświęcone pisarzowi")return utworyPosweconePisazowi(work)
     if(category==="Informacje inne")return(work.tekst)
+
+    if(category==="Pisarz")return  pisarze(work)
+    if(category==="Wstep"||category==="Biogram")return(work.tekst)
 
     return ""
 }

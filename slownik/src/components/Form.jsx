@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import data from "../data/wbpg.json";
 import "../styles/Admin.css";
+import renderWork from "../renderFunctions/renderWork.js";
 
 
 
@@ -36,8 +37,10 @@ export default function Form({
 
 
     const handleChange = (e, header) => {
-        setFormData({ ...formData, [header]: e.target.value });
-    };
+        setFormData({ ...formData, [header]: e.target.value })
+        console.log(section);
+        console.log(formData);
+        };
 
 
 
@@ -50,25 +53,35 @@ export default function Form({
 
     return (
         <div className="form-container">
-        <h2>{action === "add" ? "Add New Entry" : "Edit Entry"}</h2>
-        <form onSubmit={handleSubmit}>
-            {headers.map((header) => (
-            <div key={header} className="form-field">
-                <label>{header}</label>
-                <input
-                type="text"
-                value={formData[header] || ""}
-                onChange={(e) => handleChange(e, header)}
-                />
+            <div style={{borderRight: "1px solid black", paddingRight: "20px"}}>
+                <h2>{action === "add" ? "Add New Entry" : "Edit Entry"}</h2>
+                <h2>{section.label}</h2>
+                <form onSubmit={handleSubmit} style={{minWidth: "300px"}}>
+                    {headers.map((header) => (
+                        <div key={header} className="form-field">
+                            <label>{header}</label>
+                            <input
+                                type="text"
+                                value={formData[header] || ""}
+                                onChange={(e) => handleChange(e, header)}
+                            />
+                        </div>
+                    ))}
+                    <div className="form-buttons">
+                        <button type="submit">Save</button>
+                        <button type="button" onClick={() => setAction("watch")}>
+                            Cancel
+                        </button>
+                    </div>
+                </form>
             </div>
-            ))}
-            <div className="form-buttons">
-            <button type="submit">Save</button>
-            <button type="button" onClick={() => setAction("watch")}>
-                Cancel
-            </button>
+            <div>
+                <p
+                    dangerouslySetInnerHTML={{
+                        __html: renderWork(formData, section.full_label),
+                    }}>
+                    </p>
             </div>
-        </form>
         </div>
     );
 }
