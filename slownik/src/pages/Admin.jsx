@@ -3,7 +3,7 @@ import "../styles/Admin.css";
 import List from "../components/List";
 import Menu from "../components/Menu";
 import Form from "../components/Form";
-import rawData from "../data/wbpg.json";
+import rawData from "../data/wbpg_fixed.json";
 
 
 
@@ -80,12 +80,14 @@ export default function Admin() {
             );
         case "add":
             return (
+                    <div style={{width:'10%'}}>
             <Form
                 action={action}
                 section={section}
                 setAction={setAction}
                 onSubmit={handleAdd}
             />
+                    </div>
             );
         default:
             return null;
