@@ -66,8 +66,8 @@ export default function Form({
                         </div>
                     ))}
                     <div className="form-buttons">
-                        <button type="submit">Save</button>
-                        <button type="button" onClick={() => setAction("watch")}>
+                        <button style={{backgroundColor:"green",height:"30px"}} type="submit">Save</button>
+                        <button style={{backgroundColor:"red",height:"30px",marginTop:"10px"}} type="button" onClick={() => setAction("watch")}>
                             Cancel
                         </button>
                     </div>
