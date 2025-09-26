@@ -1,6 +1,16 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Main.css";
+import full_json from "../data/wbpg_fixed.json";
+
+const stripHtmlTags = (s) => String(s || "").replace(/<[^>]*>/g, "");
+const stripParentheses = (s) => String(s || "").replace(/\(.*?\)/g, "");
+const normalizeText = (s) =>
+  stripParentheses(stripHtmlTags(s))
+    .replace(/&nbsp;/g, " ")
+    .replace(/\u00A0/g, " ")
+    .replace(/\s+/g, " ")
+    .trim();
 
 const Main = () => {
   const [query, setQuery] = useState("");
@@ -8,10 +18,23 @@ const Main = () => {
   const [suggestions, setSuggestions] = useState([]);
 
   useEffect(() => {
-    fetch("/pisarze_full.json")
-      .then((res) => res.json())
-      .then((data) => setWriters(data))
-      .catch((err) => console.error("Błąd ładowania JSON:", err));
+    if (Array.isArray(full_json)) {
+      const pisarzTable = full_json.find((t) => t.name === "pisarz");
+      if (pisarzTable && Array.isArray(pisarzTable.data)) {
+        const normalized = pisarzTable.data
+          .filter((w) => (w.dostepny || "").toLowerCase() === "tak")
+          .map((w) => {
+            const cleanImie = normalizeText(w.imie);
+            const cleanNazwisko = normalizeText(w.nazwisko);
+            return {
+              id: w.id,
+              name: `${cleanImie} ${cleanNazwisko}`.trim(),
+            };
+          })
+          .sort((a, b) => a.name.localeCompare(b.name, "pl"));
+        setWriters(normalized);
+      }
+    }
   }, []);
 
   useEffect(() => {
@@ -23,7 +46,7 @@ const Main = () => {
     const lower = query.toLowerCase();
     const results = writers
       .filter((w) => w.name.toLowerCase().includes(lower))
-      .slice(0, 3);
+      .slice(0, 5);
 
     setSuggestions(results);
   }, [query, writers]);

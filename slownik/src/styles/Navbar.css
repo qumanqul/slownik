@@ -43,7 +43,6 @@
   left: 50%;
   transform: translateX(-50%);
   font-size: 30px;
-
 }
 .navbar-center a {
   text-decoration: none;
@@ -52,4 +51,48 @@
 }
 .navbar-center a:hover {
   text-decoration: underline;
+}
+
+.navbar .accessibility button {
+  background: none;
+  border: none;
+  color: inherit;
+  font: inherit;
+  cursor: pointer;
+  padding: 0;
+  text-decoration: none;
+}
+
+.navbar .accessibility button:hover {
+  text-decoration: underline;
+  color: black;
+}
+.accessibility {
+  position: relative;
+  display: inline-block;
+}
+
+.accessibility-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: white;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 0.5rem 1rem;
+  margin-top: 0.3rem;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  z-index: 1000;
+  min-width: 180px;
+}
+
+.accessibility-menu label {
+  display: block;
+  margin: 0.4rem 0;
+  font-size: 0.9rem;
+  cursor: pointer;
+}
+
+.accessibility-menu input {
+  margin-right: 0.5rem;
 }

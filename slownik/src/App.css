@@ -1,0 +1,31 @@
+body.dark-mode {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+.dark-mode .writer-detail h1,
+.dark-mode .writer-detail h2,
+.dark-mode .writer-detail p,
+.dark-mode .writer-detail li,
+.dark-mode .writer-detail span,
+.dark-mode .writer-detail a {
+  color: #f0f0f0 !important;
+}
+body.dark-mode p {
+  color: #e0e0e0;
+}
+body.dark-mode a {
+  color: #e0e0e0;
+}
+body.dark-mode ul li ol {
+  color: #e0e0e0;
+}
+
+body.high-contrast {
+  background-color: black;
+  color: yellow;
+}
+
+body.high-contrast a {
+  color: cyan;
+  font-weight: bold;
+}
