@@ -14,21 +14,21 @@ Follow these steps to run the project locally:
 git clone https://github.com/your-username/slownik.git
 cd slownik
 ```` 
-Install dependencies:
+2. **Install dependencies:
 
 
 Copy code
 ````bash
 npm install
 ````
-Start the development server (Vite dev server with hot reload):
+3. **Start the development server (Vite dev server with hot reload):
 
 
 Copy code
 ````bash
 npm run dev
 ````
-Open your browser at:
+4. **Open your browser at:
 ````bash
 http://localhost:5173
 ````
