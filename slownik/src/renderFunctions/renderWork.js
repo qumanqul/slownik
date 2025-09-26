@@ -27,6 +27,8 @@ function renderWork(work,category) {
     if(category==="Opracowania poszczególnych utworów")return opracowaniaPoszczegolnychUtworow(work)
     if(category==="Utwory poświęcone pisarzowi")return utworyPosweconePisazowi(work)
     if(category==="Informacje inne")return(work.tekst)
+    
+    if(category==="Wstep"||category==="Biogram")return(work.tekst)
 
     return ""
 }
