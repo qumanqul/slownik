@@ -9,7 +9,7 @@ export default function WriterDetail() {
   const [writer, setWriter] = useState(null);
   const [activeSection, setActiveSection] = useState(null);
   const sectionRefs = useRef({});
-
+    console.log(full_json)
   const normalizeId = (str) =>
     str
       .replace(/\s+/g, "-")
@@ -55,7 +55,12 @@ export default function WriterDetail() {
       </main>
     );
   }
-
+//1 i 2 nie potrzebne
+// (2,4,5,6,7,10,11,12,13,14,16,18,19,20) to tabele utworów
+// 3 to biogram na poczatku strony
+// 17 to wstep po biogramu
+// 8 to pisarz
+// 9(prace_redakcyjne) i 15(sluchowiska) i 21(zawartosc wydawnictwa)tabeli sa puste
   const sidebarSections = [
     {
       nazwa: "Wydawnictwa zwarte",
@@ -144,21 +149,21 @@ export default function WriterDetail() {
       <section className="content">
         <h1 className="name">
           {cleanText(writer.imie + " " + writer.nazwisko)}
-          {(writer.birth_date || writer.death_date) && (
-            <span className="dates">
-              ( {writer.birth_date ? `ur. ${writer.birth_date}` : ""}{" "}
-              {writer.death_date ? `– zm. ${writer.death_date}` : ""} )
-            </span>
-          )}
         </h1>
 
         {full_json[3].data.find((a) => a.id_pisarza == id) && (
           <p
             dangerouslySetInnerHTML={{
-              __html: full_json[3].data.find((a) => a.id_pisarza == id).tekst,
+              __html: renderWork(full_json[3].data.find((a) => a.id_pisarza == id),"Biogram"),
             }}
           ></p>
         )}
+
+          {full_json[17].data.find(a => a.id_pisarza == id) &&
+              // wstep
+              <p style={{}}
+                 dangerouslySetInnerHTML={{__html: renderWork(full_json[17].data.find(a => a.id_pisarza == id).tekst,"Wstep")}}></p>
+          }
 
         {sidebarSections.map((array) =>
           array.data.length > 0 ? (
