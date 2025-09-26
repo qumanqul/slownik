@@ -1,99 +1,99 @@
 .body {
-    margin: 0;
-    padding: 0;
+  margin: 0;
+  padding: 0;
 }
 
 .admin-page {
-    display: flex;
-    flex-direction: row;
-    width: 100vw;
-    align-items: flex-start;
+  display: flex;
+  flex-direction: row;
+  width: 100vw;
+  align-items: flex-start;
 }
 
-.menu {
-    width: 10vw;
+.admin-page .menu {
+  width: 10vw;
 }
 
-li {
-    border: 1px solid black;
-    margin: 0;
-    height: 40px;
-    width: 100%;
+.admin-page li {
+  border: 1px solid black;
+  margin: 0;
+  height: 40px;
+  width: 100%;
 }
 
-button {
-    background-color: white;
-    border: 0;
-    width: 100%;
-    height: 100%;
+.admin-page button {
+  background-color: white;
+  border: 0;
+  width: 100%;
+  height: 100%;
 }
 
-.h1-div {
-    padding: 30px;
-    border: 1px solid black;
-    text-align: center;
+.admin-page .h1-div {
+  padding: 30px;
+  border: 1px solid black;
+  text-align: center;
 }
 
-table {
-    border: 1px solid black;
-    margin-right: 1vw;
-    margin-left: 1vw;
-    width: 88vw;
+.admin-page table {
+  border: 1px solid black;
+  margin-right: 1vw;
+  margin-left: 1vw;
+  width: 88vw;
 }
 
-tr {
-    border: 1px solid black;
-    display: flex;
-    flex-direction: column;
+.admin-page tr {
+  border: 1px solid black;
+  display: flex;
+  flex-direction: column;
 }
 
-td {
-    border: 1px solid black;
+.admin-page td {
+  border: 1px solid black;
 }
 
-.Add-button {
-    border: 1px solid black;
-    margin-top: 1vh;
-    margin-left: 1vw;
-    width: 88vw;
-    height: 5vh;
-    background-color: green;
+.admin-page .Add-button {
+  border: 1px solid black;
+  margin-top: 1vh;
+  margin-left: 1vw;
+  width: 88vw;
+  height: 5vh;
+  background-color: green;
 }
 
-.Edit-button {
-    background-color: orange;
+.admin-page .Edit-button {
+  background-color: orange;
 }
 
-.Delete-button {
-    background-color: red;
+.admin-page .Delete-button {
+  background-color: red;
 }
 
-.Table-buttons {
-    display: flex;
-    flex-direction: row;
-    height: 4vh;
+.admin-page .Table-buttons {
+  display: flex;
+  flex-direction: row;
+  height: 4vh;
 }
 
-.pagination {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    gap: 0.5rem;
-    height: 10vh;
+.admin-page .pagination {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 0.5rem;
+  height: 10vh;
 }
 
-.pagination span {
-    width: 10vw;
+.admin-page .pagination span {
+  width: 10vw;
 }
 
-.info {
-    padding-left: 20px;
+.admin-page .info {
+  padding-left: 20px;
 }
 
-.form-container {
-    margin: 1vh 1vw;
-    width: 88vw;
-    padding: 1vh 1vw;
-    border: 1px solid black;
-    align-self: flex-start;
+.admin-page .form-container {
+  margin: 1vh 1vw;
+  width: 88vw;
+  padding: 1vh 1vw;
+  border: 1px solid black;
+  align-self: flex-start;
 }
