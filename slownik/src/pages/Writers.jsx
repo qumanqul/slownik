@@ -24,7 +24,6 @@ const cleanName = (str) =>
 
 export default function Writers() {
   const [writers, setWriters] = useState([]);
-
   useEffect(() => {
     if (Array.isArray(full_json)) {
       const pisarzTable = full_json.find((t) => t.name === "pisarz");
@@ -44,7 +43,6 @@ export default function Writers() {
   if (!writers || !writers.length) {
     return <main className="writers">Pisarza nie znalaziono</main>;
   }
-
   const grouped = groupByLetter(writers);
 
   return (

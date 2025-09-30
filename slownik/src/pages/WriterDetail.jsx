@@ -180,12 +180,6 @@ export default function WriterDetail() {
                     (a.tytul || "").localeCompare(b.tytul || "", "pl")
                   )
                   .sort((a, b) => a.rok - b.rok)
-                  .sort((a, b) =>
-                    (a.tytul_utworu || "").localeCompare(
-                      b.tytul_utworu || "",
-                      "pl"
-                    )
-                  )
                   .map((work, idx) => (
                     <li
                       key={idx}
